@@ -1,0 +1,12 @@
+$field-border: #ddd;
+
+@mixin field {
+  border: 1px solid $field-border;
+  border-radius: 0.5rem;
+  background-color: #fff;
+}
+
+@mixin text-field {
+  @include field;
+  padding: 5px 10px;
+}

@@ -1,0 +1,19 @@
+.DoubleTextField {
+  .fields {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    gap: 2rem;
+
+    .field {
+      flex: 1 0 auto;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      input {
+        flex: 1 0 auto;
+      }
+    }
+  }
+}

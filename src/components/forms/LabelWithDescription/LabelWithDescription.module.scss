@@ -1,0 +1,13 @@
+.LabelWithDescription {
+  display: inline;
+  font-size: 1.2rem;
+
+  .name {
+    font-weight: bold;
+  }
+
+  .description {
+    font-weight: normal;
+    font-style: italic;
+  }
+}

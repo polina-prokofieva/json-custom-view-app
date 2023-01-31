@@ -1,0 +1,40 @@
+@import '../../../general.scss';
+
+.Checkbox {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  input[type='checkbox'] {
+    display: none;
+    visibility: hidden;
+
+    & + label:before {
+      color: #fff;
+    }
+
+    &:checked + label:before {
+      color: inherit;
+    }
+  }
+
+  label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    cursor: pointer;
+
+    &::before {
+      content: '✓';
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.1em 0 0.1em 0.1em;
+      @include field;
+      width: 1.2em;
+      height: 1.2em;
+      font-size: 1em;
+    }
+  }
+}
