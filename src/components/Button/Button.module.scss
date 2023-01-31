@@ -24,4 +24,12 @@
   &:active {
     transform: scale(0.9);
   }
+
+  &:disabled {
+    background-color: rgb(110, 110, 110);
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
 }

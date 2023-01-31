@@ -1,6 +1,6 @@
 export interface FieldType {
   description?: string;
-  inputType: 'checkbox' | 'text' | 'twoTextFields';
+  inputType: 'checkbox' | 'text' | 'twoTextFields' | 'listOfStrings';
 }
 
 export interface SettingsFieldsType {
@@ -24,14 +24,14 @@ export const settingsFields: SettingsFieldsType = {
     description: 'change booleaens to this values',
     inputType: 'twoTextFields',
   },
-  // hidePropertiesByValue: {
-  //   description: 'fields with these values will not be visible',
-  //   inputType: 'listOfStrings',
-  // },
-  // hidePropertiesByKey: {
-  //   description: 'fields with these keys will not be visible',
-  //   inputType: 'listOfStrings',
-  // },
+  hidePropertiesByValue: {
+    description: 'fields with these values will not be visible',
+    inputType: 'listOfStrings',
+  },
+  hidePropertiesByKey: {
+    description: 'fields with these keys will not be visible',
+    inputType: 'listOfStrings',
+  },
   hideEmpty: {
     description: 'hide empty objects and arrays',
     inputType: 'checkbox',
@@ -44,10 +44,10 @@ export const settingsFields: SettingsFieldsType = {
   //   description: 'change numeric keys for array to keys from values',
   //   inputType: '',
   // },
-  // arraysAsTable: {
-  //   description: '',
-  //   inputType: 'listOfStrings',
-  // },
+  arraysAsTable: {
+    description: '',
+    inputType: 'listOfStrings',
+  },
   showNotifications: {
     description: '',
     inputType: 'checkbox',

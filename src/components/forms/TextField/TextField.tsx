@@ -9,7 +9,7 @@ interface Props {
 
 const TextField: FC<Props> = ({ value, description }) => {
   return (
-    <div key={value} className={styles.TextField}>
+    <div className={styles.TextField}>
       <div>
         <LabelWithDescription name={value} description={description} />:
       </div>

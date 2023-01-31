@@ -5,6 +5,7 @@ import TextField from '../../../components/forms/TextField/TextField';
 import { settingsFields } from './fields';
 import styles from './Settings.module.scss';
 import DoubleTextField from '../../../components/forms/DoubleTextField/DoubleTextField';
+import ListField from '../../../components/forms/ListField/ListField';
 
 interface Props {
   settings: SettingsType;
@@ -57,6 +58,18 @@ const Settings: FC<Props> = ({ settings, setSettings }) => {
             description={description}
             labels={['false', 'true']}
             initialValues={settings[value]}
+            setSettings={setSettings}
+          />
+        );
+      }
+
+      if (inputType === 'listOfStrings') {
+        return (
+          <ListField
+            key={value}
+            name={value}
+            description={description}
+            value={settings[value]}
             setSettings={setSettings}
           />
         );

@@ -5,6 +5,7 @@ import styles from './Button.module.scss';
 interface Props {
   type: 'button' | 'submit' | 'reset' | undefined;
   label: string;
+  disabled?: boolean;
 }
 
 interface LinkProps {
@@ -12,9 +13,9 @@ interface LinkProps {
   to: string;
 }
 
-const Button: FC<Props> = ({ type, label }) => {
+const Button: FC<Props> = ({ type, label, disabled }) => {
   return (
-    <button className={styles.Button} type={type}>
+    <button className={styles.Button} type={type} disabled={disabled}>
       {label}
     </button>
   );

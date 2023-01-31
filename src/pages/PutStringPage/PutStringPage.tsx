@@ -40,10 +40,11 @@ const PutStringPage: FC<Props> = ({ setData }) => {
           cols={100}
           rows={20}
           onChange={textareaChangedHandler}
-        ></textarea>
+          value={jsonValue}
+        />
         <div className={styles.buttons}>
           <ButtonNavLink to='/start' label='Back' />
-          <Button label='Render' type='submit' />
+          <Button label='Render' type='submit' disabled={!jsonValue.length} />
         </div>
       </form>
     </div>
