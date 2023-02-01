@@ -9,10 +9,6 @@ html {
   color-scheme: light dark;
   color: #192328de;
   background: rgb(223, 233, 243);
-  background: linear-gradient(
-    rgb(223, 233, 243) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

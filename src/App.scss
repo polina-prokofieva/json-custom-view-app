@@ -1,6 +1,7 @@
 @import './general.scss';
+@import './variables.scss';
 
-#root {
+#main {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -12,3 +12,5 @@ export interface SettingsType {
   arraysAsTable?: string[];
   showNotifications?: boolean;
 }
+
+export type SettingsTabType = 'form' | 'object';

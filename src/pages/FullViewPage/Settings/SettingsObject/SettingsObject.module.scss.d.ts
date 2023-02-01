@@ -1,4 +1,4 @@
 declare const classNames: {
-  readonly body: "body";
+  readonly SettingsObject: "SettingsObject";
 };
 export = classNames;

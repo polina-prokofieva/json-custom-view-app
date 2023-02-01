@@ -1,9 +1,8 @@
-.Settings {
-  display: grid;
-  gap: 0.7rem;
-}
+@import '../../../variables.scss';
 
-.settingsHeader {
-  font-size: 1.6rem;
-  margin: 1.7rem 0;
+.body {
+  padding: 1em 1.2em;
+  box-shadow: $header-shadow;
+  height: calc(100vh - 7rem);
+  overflow-y: auto;
 }

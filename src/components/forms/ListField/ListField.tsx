@@ -15,6 +15,7 @@ interface Props {
   name: string;
   value: string[];
   description?: string;
+  placeholder?: string;
   setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
@@ -22,6 +23,7 @@ const ListField: FC<Props> = ({
   name,
   value = [],
   description,
+  placeholder,
   setSettings,
 }) => {
   const [list, setList] = useState(value);
@@ -65,6 +67,7 @@ const ListField: FC<Props> = ({
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           value={current}
+          placeholder={placeholder}
         />
         <ul className={styles.listOfValues}>
           {list.map((item, idx) => (

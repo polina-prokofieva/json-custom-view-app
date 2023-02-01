@@ -1,0 +1,42 @@
+@import '../../../../variables.scss';
+
+.SettingsHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  background-color: $header-bg;
+  background: radial-gradient(
+    circle at right top,
+    $header-bg-secondary 0%,
+    $header-bg 100%
+  );
+}
+
+.header {
+  font-size: 1.6rem;
+  margin: 0.9em auto 1em 1.5em;
+  color: $base-light;
+}
+
+ul.tabs {
+  display: flex;
+  flex-direction: row;
+  margin: 0 1em 0 0;
+}
+
+li.Tab {
+  list-style: none;
+  padding: 0.5em 1em;
+  border-radius: 0.5em 0.5em 0 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: $base-light;
+  cursor: pointer;
+
+  &.active {
+    display: flex;
+    background-color: $tools-bg-primary;
+    color: $base-dark;
+    box-shadow: $header-shadow;
+  }
+}

@@ -1,6 +1,7 @@
 export interface FieldType {
   description?: string;
   inputType: 'checkbox' | 'text' | 'twoTextFields' | 'listOfStrings';
+  placeholder?: string;
 }
 
 export interface SettingsFieldsType {
@@ -8,10 +9,10 @@ export interface SettingsFieldsType {
 }
 
 export const settingsFields: SettingsFieldsType = {
-  // root: {
-  //   description: '',
-  //   inputType: '',
-  // },
+  root: {
+    description: '',
+    inputType: 'listOfStrings',
+  },
   isFormatKeys: {
     description: 'format keys',
     inputType: 'checkbox',
@@ -27,10 +28,12 @@ export const settingsFields: SettingsFieldsType = {
   hidePropertiesByValue: {
     description: 'fields with these values will not be visible',
     inputType: 'listOfStrings',
+    placeholder: 'Ex: name',
   },
   hidePropertiesByKey: {
     description: 'fields with these keys will not be visible',
     inputType: 'listOfStrings',
+    placeholder: 'Ex: empty',
   },
   hideEmpty: {
     description: 'hide empty objects and arrays',
@@ -47,9 +50,10 @@ export const settingsFields: SettingsFieldsType = {
   arraysAsTable: {
     description: '',
     inputType: 'listOfStrings',
+    placeholder: 'Ex: accounts',
   },
   showNotifications: {
-    description: '',
+    description: 'errors and warning',
     inputType: 'checkbox',
   },
 };

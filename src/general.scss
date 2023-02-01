@@ -1,9 +1,25 @@
-$field-border: #ddd;
+@import './variables.scss';
+
+$field-border: #d0d0d0;
 
 @mixin field {
   border: 1px solid $field-border;
   border-radius: 0.5rem;
   background-color: #fff;
+  color: $base-dark;
+  box-shadow: -1px 4px 10px -5px #c0c0c0bf inset;
+
+  &:focus,
+  &:focus-visible {
+    border: 1px solid $header-bg-secondary;
+    outline: none;
+    box-shadow: 0 0 14px -5px $header-bg-secondary;
+  }
+
+  &::placeholder {
+    font-style: italic;
+    color: #aab;
+  }
 }
 
 @mixin text-field {
