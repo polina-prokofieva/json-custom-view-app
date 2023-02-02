@@ -1,5 +1,6 @@
 import { FC, ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { SettingsType } from '../../../../types';
+import { convertSettingsToString } from '../../../../utils/settings';
 import styles from './SettingsObject.module.scss';
 
 interface Props {
@@ -8,8 +9,6 @@ interface Props {
 }
 
 const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
-  const convertSettings = () => JSON.stringify(settings);
-
   const handleChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     try {
       const newSettings = JSON.parse(evt.target.value);
@@ -26,7 +25,7 @@ const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
         id='settings'
         cols={30}
         rows={10}
-        value={convertSettings()}
+        value={convertSettingsToString(settings)}
         onChange={handleChange}
       />
     </form>
