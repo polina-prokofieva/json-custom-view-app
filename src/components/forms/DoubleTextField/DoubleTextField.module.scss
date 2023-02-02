@@ -1,4 +1,8 @@
+@import '../../../general.scss';
+
 .DoubleTextField {
+  @include field-with-label;
+
   .fields {
     display: flex;
     justify-content: space-between;

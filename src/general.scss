@@ -3,10 +3,13 @@
 $field-border: #d0d0d0;
 
 @mixin field {
+  padding: 0.3em 0.2em 0.1em;
   border: 1px solid $field-border;
   border-radius: 0.5rem;
   background-color: #fff;
-  color: $base-dark;
+  font-family: Courier, monotype;
+  font-size: 1em;
+  color: grey;
   box-shadow: -1px 4px 10px -5px #c0c0c0bf inset;
 
   &:focus,
@@ -14,6 +17,7 @@ $field-border: #d0d0d0;
     border: 1px solid $header-bg-secondary;
     outline: none;
     box-shadow: 0 0 14px -5px $header-bg-secondary;
+    transition: all 0.5s ease-in;
   }
 
   &::placeholder {
@@ -24,5 +28,11 @@ $field-border: #d0d0d0;
 
 @mixin text-field {
   @include field;
-  padding: 5px 10px;
+  padding: 0.6em 1em 0.5em;
+}
+
+@mixin field-with-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
 }

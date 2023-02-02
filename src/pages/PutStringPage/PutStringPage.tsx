@@ -6,7 +6,7 @@ import {
   SetStateAction,
   Dispatch,
 } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button, { ButtonNavLink } from '../../components/Button/Button';
 import styles from './PutStringPage.module.scss';
 
@@ -38,7 +38,7 @@ const PutStringPage: FC<Props> = ({ setData }) => {
           id='jsonString'
           className={styles.textarea}
           cols={100}
-          rows={20}
+          rows={5}
           onChange={textareaChangedHandler}
           value={jsonValue}
         />

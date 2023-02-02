@@ -1,3 +1,10 @@
 .SettingsObject {
   display: flex;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+
+  textarea {
+    width: 100%;
+  }
 }

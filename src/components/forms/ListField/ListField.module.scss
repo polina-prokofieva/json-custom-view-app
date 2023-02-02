@@ -1,6 +1,8 @@
 @import '../../../general.scss';
 
 .ListField {
+  @include field-with-label;
+
   .fieldAndList {
     display: flex;
     flex-direction: row;
@@ -18,7 +20,7 @@
     li {
       display: flex;
       flex-direction: row;
-      align-items: flex-end;
+      align-items: center;
       gap: 0.3em;
       list-style: none;
       margin: 0;
@@ -26,6 +28,12 @@
       border: 1px solid $field-border;
       border-radius: 0.5em;
       background-color: #f8f8f8;
+      font-family: Courier, monotype;
+
+      .item {
+        padding-top: 0.1em;
+        word-wrap: break-word;
+      }
 
       button {
         background-color: transparent;

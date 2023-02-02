@@ -41,7 +41,7 @@ const DoubleTextField: FC<Props> = ({
 
   return (
     <div className={styles.DoubleTextField}>
-      <LabelWithDescription name={name} description={description} />:
+      <LabelWithDescription name={name} description={description} />
       <div className={styles.fields}>
         {labels.map((label, idx) => (
           <div className={styles.field} key={label}>

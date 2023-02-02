@@ -57,7 +57,7 @@ const ListField: FC<Props> = ({
   return (
     <div className={styles.ListField}>
       <div>
-        <LabelWithDescription name={name} description={description} />:
+        <LabelWithDescription name={name} description={description} />
       </div>
       <div className={styles.fieldAndList}>
         <input
@@ -72,7 +72,7 @@ const ListField: FC<Props> = ({
         <ul className={styles.listOfValues}>
           {list.map((item, idx) => (
             <li key={item}>
-              {item}
+              <span className={styles.item}>{item}</span>
               <button type='button' onClick={() => handleDeleteItem(idx)}>
                 ×
               </button>

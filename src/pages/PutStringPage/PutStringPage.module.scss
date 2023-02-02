@@ -1,12 +1,12 @@
 .PutStringPage {
+  display: grid;
+  grid-template-rows: min-content auto;
   padding: 1rem 1rem 2rem 1rem;
+  height: calc(100vh - 3rem);
 
   .textarea {
-    padding: 0.6rem 1rem;
-    border-radius: 0.7rem;
-    border: 1px solid lightgrey;
     font-family: Courier, monotype;
-    font-size: 1.2em;
+    font-size: 1em;
     color: grey;
   }
 
@@ -20,5 +20,6 @@
 
 .putJsonForm {
   display: grid;
+  grid-template-rows: auto min-content;
   gap: 1rem;
 }

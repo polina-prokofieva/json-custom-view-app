@@ -11,7 +11,7 @@ const TextField: FC<Props> = ({ value, description }) => {
   return (
     <div className={styles.TextField}>
       <div>
-        <LabelWithDescription name={value} description={description} />:
+        <LabelWithDescription name={value} description={description} />
       </div>
       <input type='text' name={value} id={value} />
     </div>

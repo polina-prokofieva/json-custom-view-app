@@ -1,6 +1,8 @@
 @import '../../../variables.scss';
 
 .body {
+  display: flex;
+  align-items: stretch;
   padding: 1em 1.2em;
   box-shadow: $header-shadow;
   height: calc(100vh - 7rem);

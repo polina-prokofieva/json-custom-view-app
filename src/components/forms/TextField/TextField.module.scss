@@ -1,4 +1,5 @@
+@import '../../../general.scss';
+
 .TextField {
-  display: flex;
-  flex-direction: column;
+  @include field-with-label;
 }
