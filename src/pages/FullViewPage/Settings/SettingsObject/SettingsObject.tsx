@@ -1,4 +1,11 @@
-import { FC, ChangeEvent, Dispatch, SetStateAction } from 'react';
+import {
+  FC,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useState,
+  useEffect,
+} from 'react';
 import { SettingsType } from '../../../../types';
 import { convertSettingsToString } from '../../../../utils/settings';
 import styles from './SettingsObject.module.scss';
@@ -9,14 +16,21 @@ interface Props {
 }
 
 const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
+  const [value, setValue] = useState(convertSettingsToString(settings));
+
   const handleChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(evt.target.value);
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
     try {
-      const newSettings = JSON.parse(evt.target.value);
+      const newSettings = JSON.parse(value);
       setSettings(newSettings);
     } catch (error) {
-      // console.error(error.message);
+      console.log(error);
     }
-  };
+  }, [value]);
 
   return (
     <form className={styles.SettingsObject}>
@@ -25,7 +39,7 @@ const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
         id='settings'
         cols={30}
         rows={10}
-        value={convertSettingsToString(settings)}
+        value={value}
         onChange={handleChange}
       />
     </form>

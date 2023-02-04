@@ -1,0 +1,56 @@
+.StartPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header {
+    margin-bottom: 5rem;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+
+    a {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.2em;
+      padding: 0 0.2em;
+      color: #a3231a;
+      text-decoration: none;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0.15em;
+        background-color: #a3231a;
+        transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+      }
+
+      &:hover {
+        // border-bottom: 0.1em solid #a3231a;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .links {
+    display: grid;
+    gap: 1rem;
+    margin-top: 4rem;
+    font-size: 1.2rem;
+    text-align: center;
+
+    a {
+      color: #2a4061;
+
+      &:hover {
+        color: #4e678f;
+      }
+    }
+  }
+}

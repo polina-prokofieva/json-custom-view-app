@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ButtonNavLink } from '../Button/Button';
 import styles from './ChooseDataSource.module.scss';
 

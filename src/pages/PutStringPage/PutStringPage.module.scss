@@ -1,25 +1,6 @@
-.PutStringPage {
-  display: grid;
-  grid-template-rows: min-content auto;
-  padding: 1rem 1rem 2rem 1rem;
-  height: calc(100vh - 3rem);
-
-  .textarea {
-    font-family: Courier, monotype;
-    font-size: 1em;
-    color: grey;
-  }
-
-  .buttons {
-    display: flex;
-    gap: 0.7rem;
-    justify-content: space-between;
-    width: auto;
-  }
-}
-
-.putJsonForm {
-  display: grid;
-  grid-template-rows: auto min-content;
-  gap: 1rem;
+.textarea {
+  flex: 1 0 auto;
+  font-family: Courier, monotype;
+  font-size: 1em;
+  color: grey;
 }

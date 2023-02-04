@@ -1,0 +1,25 @@
+.PutJsonLayout {
+  display: grid;
+  padding: 1rem 1rem 2rem 1rem;
+  height: calc(100vh - 3rem);
+
+  .buttons {
+    display: flex;
+    gap: 0.7rem;
+    justify-content: space-between;
+    width: auto;
+  }
+}
+
+.putJsonForm {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  gap: 1rem;
+
+  label {
+    display: block;
+    margin: 1em 0;
+    font-weight: bold;
+    font-size: 1.17rem;
+  }
+}

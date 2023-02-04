@@ -17,7 +17,10 @@ const App = () => {
       <Routes>
         <Route path='/' element={<StartPage />} />
         <Route path='/start' element={<StartPage />} />
-        <Route path='/upload-json-file' element={<UploadFilePage />} />
+        <Route
+          path='/upload-json-file'
+          element={<UploadFilePage setData={setData} />}
+        />
         <Route
           path='/put-json-string'
           element={<PutStringPage setData={setData} />}

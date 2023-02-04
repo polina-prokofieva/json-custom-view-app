@@ -24,9 +24,10 @@ const convertValueToString = (value: any): string => {
 
 export const convertSettingsToString = (settings: SettingsType): string => {
   return (
-    Object.keys(settings).reduce((acc, key) => {
+    Object.keys(settings).reduce((acc, key, idx) => {
+      const comma = idx === 0 ? '' : ',';
       const field = settings[key]
-        ? `\n  ${key}: ${convertValueToString(settings[key])};`
+        ? `${comma}\n  "${key}": ${convertValueToString(settings[key])}`
         : '';
 
       return `${acc}${field}`;
