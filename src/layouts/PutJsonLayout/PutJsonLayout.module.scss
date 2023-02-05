@@ -1,7 +1,8 @@
 .PutJsonLayout {
   display: grid;
   padding: 1rem 1rem 2rem 1rem;
-  height: calc(100vh - 3rem);
+  height: 100vh;
+  width: 50vw;
 
   .buttons {
     display: flex;
@@ -12,8 +13,8 @@
 }
 
 .putJsonForm {
-  display: grid;
-  grid-template-rows: min-content auto min-content;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 
   label {

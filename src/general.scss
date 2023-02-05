@@ -36,3 +36,30 @@ $field-border: #d0d0d0;
   flex-direction: column;
   gap: 0.2em;
 }
+
+@mixin button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6em 1.4em;
+  background-color: rgb(54, 70, 90);
+  color: white;
+  font-weight: bold;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 1s cubic-bezier(0, 0, 0, 1);
+  box-shadow: rgb(100 100 111 / 50%) 0px 7px 15px 0;
+
+  &:hover {
+    background-color: rgb(67, 86, 110);
+    transform: scale(1.05);
+    transition: transform 0.2s ease-out;
+  }
+  
+  &:active {
+    transform: scale(0.9);
+  }
+}

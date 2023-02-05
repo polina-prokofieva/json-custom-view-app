@@ -4,7 +4,7 @@ import styles from './PutJsonLayout.module.scss';
 
 interface Props {
   name: string;
-  title: string;
+  title?: string;
   readyToRender: boolean;
   handleSubmit: (evt: FormEvent<HTMLFormElement>) => void;
   children: JSX.Element;
@@ -20,7 +20,7 @@ const PutJsonLayout: FC<Props> = ({
   return (
     <div className={styles.PutJsonLayout}>
       <form onSubmit={handleSubmit} className={styles.putJsonForm}>
-        <label htmlFor={name}>{title}:</label>
+        {title && <label htmlFor={name}>{title}:</label>}
         {children}
         <div className={styles.buttons}>
           <ButtonNavLink to='/start' label='Back' />

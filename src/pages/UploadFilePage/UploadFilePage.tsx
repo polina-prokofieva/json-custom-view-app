@@ -6,9 +6,12 @@ import {
   ChangeEvent,
   useState,
   useEffect,
+  useRef,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 import PutJsonLayout from '../../layouts/PutJsonLayout/PutJsonLayout';
+import styles from './UploadFilePage.module.scss';
 
 interface Props {
   setData: Dispatch<SetStateAction<string | null>>;
@@ -16,6 +19,7 @@ interface Props {
 
 const UploadFilePage: FC<Props> = ({ setData }) => {
   const [jsonValue, setJsonValue] = useState<string>('');
+  const fileInput = useRef<HTMLInputElement>(null);
 
   const formName = 'jsonFile';
   const navigate = useNavigate();
@@ -27,7 +31,7 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
     navigate('/full-view');
   };
 
-  const handleFileRead = (evt: ProgressEvent<FileReader>) => {
+  const handleFileRead = () => {
     const fileContent = reader.result;
 
     if (typeof fileContent === 'string') {
@@ -45,6 +49,10 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
     }
   };
 
+  const handleCaptureClick = () => {
+    fileInput?.current?.click();
+  };
+
   useEffect(() => {
     if (jsonValue.length) {
       setData(jsonValue);
@@ -55,17 +63,23 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
   return (
     <PutJsonLayout
       name={formName}
-      title='Choose file from your computer'
       readyToRender={!!jsonValue.length}
       handleSubmit={handleSubmit}
     >
-      <input
-        type='file'
-        id={formName}
-        name={formName}
-        accept='.json'
-        onChange={handleChange}
-      />
+      <div className={styles.UploadFile}>
+        <div className={styles.uploadText} onClick={handleCaptureClick}>
+          Drag and drop .json file here or{' '}
+          <Button type='button' label='select it from computer' />
+        </div>
+        <input
+          type='file'
+          id={formName}
+          name={formName}
+          accept='.json'
+          onChange={handleChange}
+          ref={fileInput}
+        />
+      </div>
     </PutJsonLayout>
   );
 };

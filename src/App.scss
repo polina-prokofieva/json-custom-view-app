@@ -14,4 +14,19 @@
     @include text-field;
     font-size: 1.2rem;
   }
+
+  input[type='file'] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: transparent;
+
+    &::file-selector-button {
+      display: none;
+      visibility: hidden;
+      margin: 50% auto 0;
+      @include button;
+    }
+  }
 }
