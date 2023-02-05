@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { dataExample } from '../data/big';
 import FullViewPage from './pages/FullViewPage/FullViewPage';
 import PutStringPage from './pages/PutStringPage/PutStringPage';
 import StartPage from './pages/StartPage/StartPage';
@@ -9,7 +8,7 @@ import { SettingsType } from './types';
 import './App.scss';
 
 const App = () => {
-  const [data, setData] = useState<string | null>(dataExample);
+  const [data, setData] = useState<string | null>(null);
   const [settings, setSettings] = useState<SettingsType>({});
 
   return (
