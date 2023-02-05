@@ -107,10 +107,9 @@ const KeyAndValueField: FC<Props> = ({
         />
         <Button type='button' label='Add' handleClick={handleAddField} />
       </div>
-      <div className={styles.existingPatterns}>
-        {keys &&
-          keys.length &&
-          keys.map((key, idx) => (
+      {keys && !!keys.length && (
+        <div className={styles.existingPatterns}>
+          {keys.map((key, idx) => (
             <ExistingValueItem
               key={key}
               idx={idx}
@@ -118,7 +117,8 @@ const KeyAndValueField: FC<Props> = ({
               item={`${key}: ${wholeValue[key]}`}
             />
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
