@@ -5,6 +5,7 @@ import {
   useState,
   useEffect,
   ChangeEvent,
+  KeyboardEvent,
   useMemo,
 } from 'react';
 import { keysForArraysType, SettingsType } from '../../../types';
@@ -53,6 +54,12 @@ const KeyAndValueField: FC<Props> = ({
     }
   };
 
+  const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === 'Enter') {
+      handleAddField();
+    }
+  };
+
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const inputName = evt.target.name;
     const inputValue = evt.target.value;
@@ -94,6 +101,7 @@ const KeyAndValueField: FC<Props> = ({
           id='pattern'
           className={styles.value}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           value={field?.pattern || ''}
           placeholder='pattern'
         />
