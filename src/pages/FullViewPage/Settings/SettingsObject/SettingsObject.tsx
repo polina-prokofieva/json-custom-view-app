@@ -23,12 +23,11 @@ const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
   };
 
   useEffect(() => {
-    console.log('useEffect');
     try {
       const newSettings = JSON.parse(value);
       setSettings(newSettings);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, [value]);
 

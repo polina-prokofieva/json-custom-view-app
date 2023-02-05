@@ -18,19 +18,25 @@ const convertValueToString = (value: any): string => {
 
   if (type === 'string') return `"${value}"`;
   if (type === 'boolean') return `${value}`;
+  if (type === 'object') return convertSettingsToString(value, 2);
 
   return `${value}`;
 };
 
-export const convertSettingsToString = (settings: SettingsType): string => {
+export const convertSettingsToString = (
+  settings: SettingsType,
+  level = 1
+): string => {
+  const prevGap = '  '.repeat(level - 1);
   return (
     Object.keys(settings).reduce((acc, key, idx) => {
       const comma = idx === 0 ? '' : ',';
+      const gap = '  '.repeat(level);
       const field = settings[key]
-        ? `${comma}\n  "${key}": ${convertValueToString(settings[key])}`
+        ? `${comma}\n${gap}"${key}": ${convertValueToString(settings[key])}`
         : '';
 
       return `${acc}${field}`;
-    }, '{') + '\n}'
+    }, '{') + `\n${prevGap}}`
   );
 };

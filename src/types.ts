@@ -1,3 +1,7 @@
+export interface keysForArraysType {
+  [key: string]: string;
+}
+
 export interface SettingsType {
   [key: string]: any;
   root?: string | string[];
@@ -8,7 +12,7 @@ export interface SettingsType {
   hidePropertiesByKey?: string[];
   hideEmpty?: boolean;
   isMergeSingleFields?: boolean;
-  keysForArrays?: object;
+  keysForArrays?: keysForArraysType;
   arraysAsTable?: string[];
   showNotifications?: boolean;
 }

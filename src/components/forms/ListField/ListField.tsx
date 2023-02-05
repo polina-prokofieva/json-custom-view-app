@@ -8,6 +8,7 @@ import {
   KeyboardEvent,
 } from 'react';
 import { SettingsType } from '../../../types';
+import ExistingValueItem from '../ExistingValueItem/ExistingValueItem';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './ListField.module.scss';
 
@@ -71,12 +72,12 @@ const ListField: FC<Props> = ({
         />
         <ul className={styles.listOfValues}>
           {list.map((item, idx) => (
-            <li key={item}>
-              <span className={styles.item}>{item}</span>
-              <button type='button' onClick={() => handleDeleteItem(idx)}>
-                ×
-              </button>
-            </li>
+            <ExistingValueItem
+              key={item}
+              item={item}
+              idx={idx}
+              handleDeleteItem={handleDeleteItem}
+            />
           ))}
         </ul>
       </div>

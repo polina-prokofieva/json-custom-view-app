@@ -6,6 +6,7 @@ import ListField from '../../../../components/forms/ListField/ListField';
 import { SettingsType } from '../../../../types';
 import { settingsFields } from '../fields';
 import styles from './SettingsForm.module.scss';
+import KeyAndValueField from '../../../../components/forms/KeyAndValueField/KeyAndValueField';
 
 interface Props {
   settings: SettingsType;
@@ -72,6 +73,18 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
             value={settings[value]}
             setSettings={setSettings}
             placeholder={placeholder}
+          />
+        );
+      }
+
+      if (inputType === 'object') {
+        return (
+          <KeyAndValueField
+            key={value}
+            name={value}
+            description={description}
+            setSettings={setSettings}
+            wholeValue={settings[value]}
           />
         );
       }

@@ -1,6 +1,6 @@
 export interface FieldType {
   description?: string;
-  inputType: 'checkbox' | 'text' | 'twoTextFields' | 'listOfStrings';
+  inputType: 'checkbox' | 'text' | 'twoTextFields' | 'listOfStrings' | 'object';
   placeholder?: string;
 }
 
@@ -43,10 +43,10 @@ export const settingsFields: SettingsFieldsType = {
     description: 'merge single fields to one',
     inputType: 'checkbox',
   },
-  // keysForArrays: {
-  //   description: 'change numeric keys for array to keys from values',
-  //   inputType: '',
-  // },
+  keysForArrays: {
+    description: 'change numeric keys for array to keys from values',
+    inputType: 'object',
+  },
   arraysAsTable: {
     description: '',
     inputType: 'listOfStrings',
