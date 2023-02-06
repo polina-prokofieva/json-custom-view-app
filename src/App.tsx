@@ -11,23 +11,21 @@ const App = () => {
   const [data, setData] = useState<string | null>(null);
   const [settings, setSettings] = useState<SettingsType>({});
 
-  console.log('App');
-
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<StartPage />} />
-        <Route path='/start' element={<StartPage />} />
+        <Route path={`/${PROJECT_NAME}/`} element={<StartPage />} />
+        <Route path={`/${PROJECT_NAME}/start`} element={<StartPage />} />
         <Route
-          path='/upload-json-file'
+          path={`/${PROJECT_NAME}/upload-json-file`}
           element={<UploadFilePage setData={setData} />}
         />
         <Route
-          path='/put-json-string'
+          path={`/${PROJECT_NAME}/put-json-string`}
           element={<PutStringPage setData={setData} />}
         />
         <Route
-          path='/full-view'
+          path={`/${PROJECT_NAME}/full-view`}
           element={
             data && (
               <FullViewPage

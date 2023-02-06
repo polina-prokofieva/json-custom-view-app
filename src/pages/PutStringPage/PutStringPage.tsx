@@ -22,7 +22,7 @@ const PutStringPage: FC<Props> = ({ setData }) => {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setData(jsonValue);
-    navigate('/full-view');
+    navigate(`/${PROJECT_NAME}/full-view`);
   };
 
   const textareaChangedHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {

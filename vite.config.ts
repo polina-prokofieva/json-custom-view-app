@@ -5,5 +5,8 @@ import sassDts from 'vite-plugin-sass-dts';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), sassDts()],
-  base: '/json-custom-view-app/',
+  base: `/json-custom-view-app/`,
+  define: {
+    PROJECT_NAME: JSON.stringify(process.env.npm_package_name),
+  },
 });

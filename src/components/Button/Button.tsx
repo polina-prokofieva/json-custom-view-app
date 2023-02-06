@@ -29,7 +29,7 @@ const Button: FC<Props> = ({ type, label, disabled, handleClick }) => {
 
 const ButtonNavLink: FC<LinkProps> = ({ label, to }) => {
   return (
-    <NavLink to={to} className={styles.Button}>
+    <NavLink to={`/${PROJECT_NAME}${to}`} className={styles.Button}>
       {label}
     </NavLink>
   );

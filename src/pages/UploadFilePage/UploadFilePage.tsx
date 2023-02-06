@@ -28,7 +28,7 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setData(jsonValue);
-    navigate('/full-view');
+    navigate(`/${PROJECT_NAME}/full-view`);
   };
 
   const handleFileRead = () => {
@@ -56,7 +56,7 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
   useEffect(() => {
     if (jsonValue.length) {
       setData(jsonValue);
-      navigate('/full-view');
+      navigate(`/${PROJECT_NAME}/full-view`);
     }
   }, [jsonValue]);
 
