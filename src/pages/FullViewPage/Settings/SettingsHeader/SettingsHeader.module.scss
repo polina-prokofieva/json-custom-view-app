@@ -32,11 +32,23 @@ li.Tab {
   font-weight: bold;
   color: $base-light;
   cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.5, 0, 0, 1);
+
+  &:hover {
+    color: white;
+    text-shadow: 0px 0px 20px #0f111a;
+  }
 
   &.active {
     display: flex;
     background-color: $tools-bg-primary;
     color: $base-dark;
     box-shadow: $header-shadow;
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+
+    &:hover {
+      color: inherit;
+      text-shadow: inherit;
+    }
   }
 }
