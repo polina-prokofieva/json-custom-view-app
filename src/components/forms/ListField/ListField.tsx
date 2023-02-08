@@ -73,7 +73,7 @@ const ListField: FC<Props> = ({
         <ul className={styles.listOfValues}>
           {list.map((item, idx) => (
             <ExistingValueItem
-              key={item}
+              key={`${item} ${typeof item}`}
               item={item}
               idx={idx}
               handleDeleteItem={handleDeleteItem}
