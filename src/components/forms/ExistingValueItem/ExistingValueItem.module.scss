@@ -1,4 +1,5 @@
 @import '../../../general.scss';
+@import '../../../variables.scss';
 
 .ExistingValueItem {
   display: flex;
@@ -12,6 +13,25 @@
   border-radius: 0.5em;
   background-color: #f8f8f8;
   font-family: Courier, monotype;
+
+  &.string {
+    font-style: italic;
+  }
+
+  &.number {
+    color: #4a8a4d;
+    font-weight: bold;
+  }
+
+  &.boolean,
+  &.null {
+    color: #5e89b1;
+    font-style: italic;
+  }
+
+  &.boolean {
+    font-weight: bold;
+  }
 
   .item {
     padding-top: 0.1em;
