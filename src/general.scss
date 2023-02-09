@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 $field-border: #d0d0d0;
 
@@ -58,7 +58,7 @@ $field-border: #d0d0d0;
     transform: scale(1.05);
     transition: transform 0.2s ease-out;
   }
-  
+
   &:active {
     transform: scale(0.9);
   }
