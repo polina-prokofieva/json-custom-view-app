@@ -2,13 +2,11 @@ name: Build and Deploy
 
 on:
   pull_request:
-    branches:
-      - main
-    types:
-      - closed
+    types: closed
 
 jobs:
   lint:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +19,7 @@ jobs:
 
   build:
     name: Build
-    if: ${{ github.event.pull_request.merged }}
+    needs: lint
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +45,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [lint, build]
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
@@ -63,3 +61,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+  close_job:
+    if: github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo PR #${{ github.event.number }} has been closed without being merged
