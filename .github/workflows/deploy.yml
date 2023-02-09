@@ -8,6 +8,17 @@ on:
       - closed
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run editorconfig
+
   build:
     name: Build
     if: ${{ github.event.pull_request.merged }}
@@ -36,7 +47,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: build
+    needs: [lint, build]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
