@@ -10,3 +10,10 @@
   height: calc(100vh - 4.6em);
   overflow-y: auto;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
