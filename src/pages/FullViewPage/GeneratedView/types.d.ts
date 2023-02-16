@@ -4,4 +4,6 @@ declare module 'json-custom-view' {
     mainNode: HTMLElement,
     settings: object
   ) => void;
+
+  export const transform: (json: object, settings: object) => object;
 }
