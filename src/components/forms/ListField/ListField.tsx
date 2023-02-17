@@ -28,7 +28,7 @@ const ListField: FC<Props> = ({
   setSettings,
 }) => {
   const [list, setList] = useState(value);
-  const [current, setCurrent] = useState<string>('');
+  const [current, setCurrent] = useState('');
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setCurrent(evt.target.value);

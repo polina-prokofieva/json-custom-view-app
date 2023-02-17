@@ -7,6 +7,7 @@ import { SettingsType } from '../../../../types';
 import { settingsFields } from '../fields';
 import styles from './SettingsForm.module.scss';
 import KeyAndValueField from '../../../../components/forms/KeyAndValueField/KeyAndValueField';
+import PathField from '../../../../components/forms/PathField/PathField';
 
 interface Props {
   settings: SettingsType;
@@ -85,6 +86,17 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
             description={description}
             setSettings={setSettings}
             wholeValue={settings[value]}
+          />
+        );
+      }
+
+      if (inputType === 'path') {
+        return (
+          <PathField
+            key={value}
+            name={value}
+            value={settings[value]}
+            setSettings={setSettings}
           />
         );
       }
