@@ -1,6 +1,12 @@
 export interface FieldType {
   description?: string;
-  inputType: 'checkbox' | 'text' | 'twoTextFields' | 'listOfStrings' | 'object';
+  inputType:
+    | 'checkbox'
+    | 'text'
+    | 'twoTextFields'
+    | 'listOfStrings'
+    | 'object'
+    | 'path';
   placeholder?: string;
 }
 
@@ -11,7 +17,7 @@ export interface SettingsFieldsType {
 export const settingsFields: SettingsFieldsType = {
   root: {
     description: '',
-    inputType: 'listOfStrings',
+    inputType: 'path',
   },
   isFormatKeys: {
     description: 'format keys',

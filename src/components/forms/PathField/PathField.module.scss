@@ -1,0 +1,35 @@
+@import '../../../general.scss';
+
+.PathField {
+  @include field-with-label;
+
+  .valueAndField {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    color: #666;
+
+    & > input {
+      flex-grow: 1;
+      transition: all 2s ease-in-out;
+    }
+  }
+
+  .labelAndResetButton {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+  }
+}
+
+.PathValue {
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  text-align: right;
+  margin-bottom: 0.2em;
+  line-height: 2;
+}

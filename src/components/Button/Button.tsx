@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Button.module.scss';
+import classnames from 'classnames';
 
 interface Props {
   type: 'button' | 'submit' | 'reset' | undefined;
   label: string;
   disabled?: boolean;
   handleClick?: (evt: any) => void;
+  additionalClass?: string;
 }
 
 interface LinkProps {
@@ -14,10 +16,19 @@ interface LinkProps {
   to: string;
 }
 
-const Button: FC<Props> = ({ type, label, disabled, handleClick }) => {
+const Button: FC<Props> = ({
+  type,
+  label,
+  disabled,
+  handleClick,
+  additionalClass,
+}) => {
+  const classNames = classnames(styles.Button, {
+    [additionalClass || 0]: !!additionalClass,
+  });
   return (
     <button
-      className={styles.Button}
+      className={classNames}
       type={type}
       disabled={disabled}
       onClick={handleClick}
@@ -35,6 +46,10 @@ const ButtonNavLink: FC<LinkProps> = ({ label, to }) => {
   );
 };
 
-export { ButtonNavLink };
+const SmallButton: FC<Props> = props => (
+  <Button {...props} additionalClass={styles.small} />
+);
+
+export { ButtonNavLink, SmallButton };
 
 export default Button;
