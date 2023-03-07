@@ -6,7 +6,7 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { SettingsType } from '../../../types';
+import { SettingsType } from 'json-custom-view';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './DoubleTextField.module.scss';
 

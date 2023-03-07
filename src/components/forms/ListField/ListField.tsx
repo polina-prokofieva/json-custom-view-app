@@ -7,7 +7,7 @@ import {
   ChangeEvent,
   KeyboardEvent,
 } from 'react';
-import { SettingsType } from '../../../types';
+import { SettingsType } from 'json-custom-view';
 import ExistingValueItem from '../ExistingValueItem/ExistingValueItem';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './ListField.module.scss';

@@ -8,7 +8,7 @@ import {
   KeyboardEvent,
   useMemo,
 } from 'react';
-import { keysForArraysType, SettingsType } from '../../../types';
+import { keysForArraysType, SettingsType } from 'json-custom-view';
 import Button from '../../Button/Button';
 import ExistingValueItem from '../ExistingValueItem/ExistingValueItem';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';

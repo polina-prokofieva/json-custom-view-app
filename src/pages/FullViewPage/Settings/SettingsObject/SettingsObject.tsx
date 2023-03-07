@@ -6,7 +6,7 @@ import {
   useState,
   useEffect,
 } from 'react';
-import { SettingsType } from '../../../../types';
+import { SettingsType } from 'json-custom-view';
 import { convertSettingsToString } from '../../../../utils/settings';
 import styles from './SettingsObject.module.scss';
 

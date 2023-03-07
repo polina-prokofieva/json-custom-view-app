@@ -1,7 +1,7 @@
 import { FC, Dispatch, SetStateAction } from 'react';
 import GeneratedView from './GeneratedView/GeneratedView';
 import Settings from './Settings/Settings';
-import { SettingsType } from '../../types';
+import { SettingsType } from 'json-custom-view';
 import styles from './FullViewPage.module.scss';
 
 interface Props {

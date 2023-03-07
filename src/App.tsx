@@ -4,7 +4,7 @@ import FullViewPage from './pages/FullViewPage/FullViewPage';
 import PutStringPage from './pages/PutStringPage/PutStringPage';
 import StartPage from './pages/StartPage/StartPage';
 import UploadFilePage from './pages/UploadFilePage/UploadFilePage';
-import { SettingsType } from './types';
+import { SettingsType } from 'json-custom-view';
 import './App.scss';
 
 const App = () => {

@@ -8,7 +8,7 @@ import {
   useState,
   useEffect,
 } from 'react';
-import { SettingsType } from '../../../types';
+import { SettingsType } from 'json-custom-view';
 import { SmallButton } from '../../Button/Button';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './PathField.module.scss';

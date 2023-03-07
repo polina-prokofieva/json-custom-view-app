@@ -1,6 +1,7 @@
 import { FC, Dispatch, SetStateAction, useState } from 'react';
 import { transform } from 'json-custom-view';
-import { SettingsTabType, SettingsType } from '../../../types';
+import { SettingsTabType } from '../../../types';
+import { SettingsType } from 'json-custom-view';
 import SettingsForm from './SettingsForm/SettingsForm';
 import SettingsObject from './SettingsObject/SettingsObject';
 import SettingsHeader from './SettingsHeader/SettingsHeader';

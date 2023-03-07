@@ -3,7 +3,7 @@ import Checkbox from '../../../../components/forms/Checkbox/Checkbox';
 import TextField from '../../../../components/forms/TextField/TextField';
 import DoubleTextField from '../../../../components/forms/DoubleTextField/DoubleTextField';
 import ListField from '../../../../components/forms/ListField/ListField';
-import { SettingsType } from '../../../../types';
+import { SettingsType } from 'json-custom-view';
 import { settingsFields } from '../fields';
 import styles from './SettingsForm.module.scss';
 import KeyAndValueField from '../../../../components/forms/KeyAndValueField/KeyAndValueField';

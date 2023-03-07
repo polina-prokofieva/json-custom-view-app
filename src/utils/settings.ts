@@ -1,4 +1,4 @@
-import { SettingsType } from '../types';
+import { SettingsType } from 'json-custom-view';
 
 const convertArrayToString = (
   value: (string | null | boolean | number | object)[]
@@ -15,7 +15,6 @@ const convertValueToString = (value: any): string => {
   if (Array.isArray(value)) return convertArrayToString(value);
 
   const type = typeof value;
-
   if (type === 'string') return `"${value}"`;
   if (type === 'boolean') return `${value}`;
   if (type === 'object') return convertSettingsToString(value, 2);
