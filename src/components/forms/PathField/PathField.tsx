@@ -16,8 +16,6 @@ import styles from './PathField.module.scss';
 interface Props {
   name: string;
   value: string[];
-  description?: string;
-  placeholder?: string;
   setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
