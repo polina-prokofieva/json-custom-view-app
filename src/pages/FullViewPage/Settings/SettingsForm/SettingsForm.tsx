@@ -1,13 +1,8 @@
 import { FC, ChangeEvent, Dispatch, SetStateAction, useCallback } from 'react';
-import Checkbox from '../../../../components/forms/Checkbox/Checkbox';
-import TextField from '../../../../components/forms/TextField/TextField';
-import DoubleTextField from '../../../../components/forms/DoubleTextField/DoubleTextField';
-import ListField from '../../../../components/forms/ListField/ListField';
 import { SettingsType } from 'json-custom-view';
 import { settingsFields } from '../fields';
 import styles from './SettingsForm.module.scss';
-import KeyAndValueField from '../../../../components/forms/KeyAndValueField/KeyAndValueField';
-import PathField from '../../../../components/forms/PathField/PathField';
+import SettingField from '../SettingField/SettingField';
 
 interface Props {
   settings: SettingsType;
@@ -21,11 +16,11 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
     const { name, checked, value } = evt.target;
 
     if (settingsFields[name]) {
-      const { inputType } = settingsFields[name];
+      const { Component } = settingsFields[name];
 
-      if (inputType === 'checkbox') {
+      if (Component.name === 'Checkbox') {
         setSettings((prev: SettingsType) => ({ ...prev, [name]: checked }));
-      } else if (inputType === 'text') {
+      } else if (Component.name === 'TextField') {
         setSettings((prev: SettingsType) => ({ ...prev, [name]: value }));
       }
     }
@@ -33,75 +28,44 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
 
   const renderField = useCallback(
     (value: string): JSX.Element => {
-      const { inputType, description, placeholder } = settingsFields[value];
+      const { Component, description, placeholder } = settingsFields[value];
 
-      if (inputType === 'checkbox') {
-        return (
-          <Checkbox
-            key={value}
-            value={value}
-            checked={settings[value]}
-            description={description}
-          />
-        );
+      const commonProps: object = {
+        Component,
+        description,
+        placeholder,
+        key: value,
+      };
+
+      let props: object;
+
+      if (Component.name === 'Checkbox') {
+        props = { value, checked: settings[value] };
+      } else if (Component.name === 'TextField') {
+        props = { value };
+      } else {
+        props = { setSettings, name: value };
       }
 
-      if (inputType === 'text') {
-        return (
-          <TextField value={value} description={description} key={value} />
-        );
+      if (Component.name === 'DoubleTextField') {
+        props = {
+          ...props,
+          labels: ['false', 'true'],
+          initialValues: settings[value],
+        };
       }
 
-      if (inputType === 'twoTextFields') {
-        return (
-          <DoubleTextField
-            key={value}
-            name={value}
-            description={description}
-            labels={['false', 'true']}
-            initialValues={settings[value]}
-            setSettings={setSettings}
-          />
-        );
+      if (Component.name === 'ListField' || Component.name === 'PathField') {
+        props = { ...props, value: settings[value] };
       }
 
-      if (inputType === 'listOfStrings') {
-        return (
-          <ListField
-            key={value}
-            name={value}
-            description={description}
-            value={settings[value]}
-            setSettings={setSettings}
-            placeholder={placeholder}
-          />
-        );
+      if (Component.name === 'KeyAndValueField') {
+        props = { wholeValue: settings[value] };
       }
 
-      if (inputType === 'object') {
-        return (
-          <KeyAndValueField
-            key={value}
-            name={value}
-            description={description}
-            setSettings={setSettings}
-            wholeValue={settings[value]}
-          />
-        );
-      }
+      props = { ...commonProps, ...props };
 
-      if (inputType === 'path') {
-        return (
-          <PathField
-            key={value}
-            name={value}
-            value={settings[value]}
-            setSettings={setSettings}
-          />
-        );
-      }
-
-      return <></>;
+      return <SettingField description={description} {...props} />;
     },
     [settings, setSettings]
   );
