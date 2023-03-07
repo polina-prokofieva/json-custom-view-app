@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import FullViewPage from './pages/FullViewPage/FullViewPage';
 import PutStringPage from './pages/PutStringPage/PutStringPage';
 import StartPage from './pages/StartPage/StartPage';
@@ -27,12 +32,14 @@ const App = () => {
         <Route
           path={`/${PROJECT_NAME}/full-view`}
           element={
-            data && (
+            data ? (
               <FullViewPage
                 data={data}
                 settings={settings}
                 setSettings={setSettings}
               />
+            ) : (
+              <Navigate replace to={`/${PROJECT_NAME}/`} />
             )
           }
         />
