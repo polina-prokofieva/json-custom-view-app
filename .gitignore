@@ -22,3 +22,5 @@ data
 *.njsproj
 *.sln
 *.sw?
+
+**/*.module.d.scss.ts
