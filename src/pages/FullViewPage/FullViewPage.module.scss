@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@use '../../variables.scss';
 
 .FullViewPage {
   display: grid;
@@ -17,7 +17,7 @@
   .settings {
     height: 100vh;
     width: 50vw;
-    background: linear-gradient($tools-bg-primary 0%, $tools-bg-secondary 100%);
+    background: linear-gradient(variables.$tools-bg-primary 0%, variables.$tools-bg-secondary 100%);
   }
 
   .data {

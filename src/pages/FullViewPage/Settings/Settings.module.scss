@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@use '../../../variables.scss';
 
 .body {
   display: flex;
@@ -6,7 +6,7 @@
   align-items: flex-start;
   gap: 1.5rem;
   padding: 1em 1.2em;
-  box-shadow: $header-shadow;
+  box-shadow: variables.$header-shadow;
   height: calc(100vh - 4.6em);
   overflow-y: auto;
 }

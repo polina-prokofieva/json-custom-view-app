@@ -1,21 +1,21 @@
-@import '../../../../variables.scss';
+@use '../../../../variables.scss';
 
 .SettingsHeader {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  background-color: $header-bg;
+  background-color: variables.$header-bg;
   background: radial-gradient(
     circle at right top,
-    $header-bg-secondary 0%,
-    $header-bg 100%
+    variables.$header-bg-secondary 0%,
+    variables.$header-bg 100%
   );
 }
 
 .header {
   font-size: 1.6rem;
   margin: 0.9em auto 1em 1.5em;
-  color: $base-light;
+  color: variables.$base-light;
 }
 
 ul.tabs {
@@ -30,7 +30,7 @@ li.Tab {
   border-radius: 0.5em 0.5em 0 0;
   font-size: 1.3rem;
   font-weight: bold;
-  color: $base-light;
+  color: variables.$base-light;
   cursor: pointer;
   transition: all 0.5s cubic-bezier(0.5, 0, 0, 1);
 
@@ -41,9 +41,9 @@ li.Tab {
 
   &.active {
     display: flex;
-    background-color: $tools-bg-primary;
-    color: $base-dark;
-    box-shadow: $header-shadow;
+    background-color: variables.$tools-bg-primary;
+    color: variables.$base-dark;
+    box-shadow: variables.$header-shadow;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
 
     &:hover {

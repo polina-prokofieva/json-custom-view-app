@@ -1,5 +1,5 @@
-@import '../../../general.scss';
+@use '../../../general.scss';
 
 .TextField {
-  @include field-with-label;
+  @include general.field-with-label;
 }

@@ -1,9 +1,9 @@
-@import '../../general.scss';
+@use '../../general.scss';
 
 .Button {
   font-size: 1.2rem;
 
-  @include button;
+  @include general.button;
 
   &:disabled {
     background-color: rgb(110, 110, 110);

@@ -1,7 +1,7 @@
-@import '../../../general.scss';
+@use '../../../general.scss';
 
 .DoubleTextField {
-  @include field-with-label;
+  @include general.field-with-label;
 
   .fields {
     display: flex;
