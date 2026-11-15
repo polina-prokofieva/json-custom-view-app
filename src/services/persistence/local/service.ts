@@ -1,7 +1,8 @@
+import { SettingsType } from 'json-custom-view';
 import { localDatabasePromise } from './database';
 
 export const localPersistenceService = {
-  async saveMainJson(data: unknown) {
+  async saveMainJson(data: string | null) {
     const db = await localDatabasePromise;
     await db.put('localData', data, 'mainJson');
   },
@@ -11,7 +12,7 @@ export const localPersistenceService = {
     return db.get('localData', 'mainJson');
   },
 
-  async saveSettingsJson(data: unknown) {
+  async saveSettingsJson(data: SettingsType) {
     const db = await localDatabasePromise;
     await db.put('localData', data, 'settingsJson');
   },
