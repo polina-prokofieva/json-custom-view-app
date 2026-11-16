@@ -67,6 +67,19 @@ const App = () => {
     }
   }
 
+  const saveSettings = async (settingsToSave: SettingsType) => {
+    try {
+      await localPersistenceService.saveSettingsJson(settingsToSave);
+    } catch (error) {
+      console.error('Failed to save settings:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (isLoading) return;
+    saveSettings(settings);
+  }, [settings, isLoading]);
+
   if (isLoading) {
     return <Spinner />;
   }
