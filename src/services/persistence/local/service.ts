@@ -7,9 +7,10 @@ export const localPersistenceService = {
     await db.put('localData', data, 'mainJson');
   },
 
-  async loadMainJson() {
+  async loadMainJson(): Promise<string | null> {
     const db = await localDatabasePromise;
-    return db.get('localData', 'mainJson');
+    const value = await db.get('localData', 'mainJson');
+    return typeof value === 'string' ? value : null;
   },
 
   async saveSettingsJson(data: SettingsType) {
