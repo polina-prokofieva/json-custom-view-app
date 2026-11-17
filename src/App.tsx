@@ -87,6 +87,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path={`/${PROJECT_NAME}`} element={<StartPage />} />
         <Route path={`/${PROJECT_NAME}/`} element={<StartPage />} />
         <Route path={`/${PROJECT_NAME}/start`} element={<StartPage />} />
         <Route
