@@ -1,4 +1,4 @@
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, ReactElement } from 'react';
 import Button, { ButtonNavLink } from '../../components/Button/Button';
 import styles from './PutJsonLayout.module.scss';
 
@@ -7,7 +7,7 @@ interface Props {
   title?: string;
   readyToRender: boolean;
   handleSubmit: (evt: FormEvent<HTMLFormElement>) => void;
-  children: JSX.Element;
+  children: ReactElement;
 }
 
 const PutJsonLayout: FC<Props> = ({
