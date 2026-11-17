@@ -1,6 +1,6 @@
-import { FC, ChangeEvent, Dispatch, SetStateAction, useCallback } from 'react';
+import { FC, ChangeEvent, Dispatch, SetStateAction, useCallback, JSX } from 'react';
 import { SettingsType } from 'json-custom-view';
-import { settingsFields } from '../fields';
+import { SettingsFieldName, settingsFields } from '../fields';
 import styles from './SettingsForm.module.scss';
 import SettingField from '../SettingField/SettingField';
 
@@ -10,13 +10,13 @@ interface Props {
 }
 
 const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
-  const settingsFieldNames = Object.keys(settingsFields);
+  const settingsFieldNames = Object.keys(settingsFields) as SettingsFieldName[];
 
   const handleChange = (evt: ChangeEvent<HTMLFormElement>) => {
     const { name, checked, value } = evt.target;
 
-    if (settingsFields[name]) {
-      const { Component } = settingsFields[name];
+    if (settingsFields[name as SettingsFieldName]) {
+      const { Component } = settingsFields[name as SettingsFieldName];
 
       if (Component.name === 'Checkbox') {
         setSettings((prev: SettingsType) => ({ ...prev, [name]: checked }));
@@ -27,8 +27,8 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
   };
 
   const renderField = useCallback(
-    (value: string): JSX.Element => {
-      const { Component, description, placeholder } = settingsFields[value];
+    (value: SettingsFieldName): JSX.Element => {
+      const { Component, description, placeholder = null } = settingsFields[value];
 
       const commonProps: object = {
         Component,
@@ -42,7 +42,7 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
       if (Component.name === 'Checkbox') {
         props = { value, checked: settings[value] };
       } else if (Component.name === 'TextField') {
-        props = { value };
+        props = { value, current: settings[value] ?? '' };
       } else {
         props = { setSettings, name: value };
       }
@@ -60,7 +60,7 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
       }
 
       if (Component.name === 'KeyAndValueField') {
-        props = { wholeValue: settings[value] };
+        props = { ...props, wholeValue: settings[value] };
       }
 
       props = { ...commonProps, ...props };

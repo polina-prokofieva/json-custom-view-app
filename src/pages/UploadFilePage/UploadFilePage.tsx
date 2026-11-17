@@ -14,7 +14,7 @@ import PutJsonLayout from '../../layouts/PutJsonLayout/PutJsonLayout';
 import styles from './UploadFilePage.module.scss';
 
 interface Props {
-  setData: Dispatch<SetStateAction<string | null>>;
+  setData: (dataToSave: string | null) => void;
 }
 
 const UploadFilePage: FC<Props> = ({ setData }) => {

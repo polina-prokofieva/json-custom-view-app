@@ -12,11 +12,7 @@ export interface FieldType {
   placeholder?: string;
 }
 
-export interface SettingsFieldsType {
-  [key: string]: FieldType;
-}
-
-export const settingsFields: SettingsFieldsType = {
+const fields = {
   root: {
     description: '',
     Component: PathField,
@@ -64,4 +60,8 @@ export const settingsFields: SettingsFieldsType = {
     description: 'errors and warning',
     Component: Checkbox,
   },
-};
+} satisfies Record<string, FieldType>;
+
+export type SettingsFieldName = keyof typeof fields;
+
+export const settingsFields: Record<SettingsFieldName, FieldType> = fields;

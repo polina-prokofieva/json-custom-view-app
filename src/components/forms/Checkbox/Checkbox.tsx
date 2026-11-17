@@ -11,7 +11,7 @@ interface Props {
 const Checkbox: FC<Props> = ({ value, checked, description }) => {
   return (
     <div key={value} className={styles.Checkbox}>
-      <input type='checkbox' name={value} id={value} checked={checked} />
+      <input type='checkbox' name={value} id={value} checked={!!checked} readOnly />
       <LabelWithDescription name={value} description={description} />
     </div>
   );

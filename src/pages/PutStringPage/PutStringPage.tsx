@@ -11,7 +11,7 @@ import PutJsonLayout from '../../layouts/PutJsonLayout/PutJsonLayout';
 import styles from './PutStringPage.module.scss';
 
 interface Props {
-  setData: Dispatch<SetStateAction<string | null>>;
+  setData: (dataToSave: string | null) => void;
 }
 
 const PutStringPage: FC<Props> = ({ setData }) => {
