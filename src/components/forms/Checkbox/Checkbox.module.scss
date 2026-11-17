@@ -31,7 +31,7 @@
       justify-content: center;
       align-items: center;
       padding: 0.1em 0 0.1em 0.1em;
-      @include general.field;
+      @include general.field($with-placeholder: false);
       width: 1.2em;
       height: 1.2em;
       font-size: 1em;
