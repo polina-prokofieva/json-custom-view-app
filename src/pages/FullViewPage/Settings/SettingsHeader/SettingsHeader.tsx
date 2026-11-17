@@ -41,7 +41,7 @@ const Tab: FC<TabProps> = ({ name, isActive, setActiveTab }) => {
 
   return (
     <li
-      className={classNames(styles.Tab, { [styles.active]: isActive })}
+      className={classNames(styles.Tab, isActive && styles.active)}
       onClick={handleClick}
     >
       {name}
