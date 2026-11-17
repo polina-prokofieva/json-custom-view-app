@@ -87,9 +87,19 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path={`/${PROJECT_NAME}`} element={<StartPage />} />
-        <Route path={`/${PROJECT_NAME}/`} element={<StartPage />} />
-        <Route path={`/${PROJECT_NAME}/start`} element={<StartPage />} />
+        <Route
+          path={`/${PROJECT_NAME}`}
+          element={<StartPage isSavedDataExists={!!data} />}
+        />
+        <Route
+          path={`/${PROJECT_NAME}/`}
+          element={<StartPage isSavedDataExists={!!data} />}
+        />
+        <Route
+          path={`/${PROJECT_NAME}/start`}
+          element={<StartPage isSavedDataExists={!!data} />}
+        />
+
         <Route
           path={`/${PROJECT_NAME}/upload-json-file`}
           element={<UploadFilePage setData={saveData} />}

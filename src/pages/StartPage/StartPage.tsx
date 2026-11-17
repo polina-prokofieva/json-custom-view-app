@@ -2,7 +2,11 @@ import { FC } from 'react';
 import ChooseDataSource from '../../components/ChooseDataSource/ChooseDataSource';
 import styles from './StartPage.module.scss';
 
-const StartPage: FC = () => {
+type Props = {
+  isSavedDataExists?: boolean;
+}
+
+const StartPage: FC<Props> = ({ isSavedDataExists = false }) => {
   return (
     <div className={styles.StartPage}>
       <h2 className={styles.header}>
@@ -15,7 +19,7 @@ const StartPage: FC = () => {
         </a>{' '}
         library.
       </h2>
-      <ChooseDataSource />
+      <ChooseDataSource isSavedDataExists={isSavedDataExists} />
       <p className={styles.links}>
         <a
           href='https://www.npmjs.com/package/json-custom-view'
