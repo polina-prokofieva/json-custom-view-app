@@ -1,5 +1,4 @@
-@import './general.scss';
-@import './variables.scss';
+@use './general.scss' as *;
 
 #main {
   display: flex;
