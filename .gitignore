@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 data
+dist
 *.local
 
 # Editor directories and files
@@ -24,3 +25,4 @@ data
 *.sw?
 
 **/*.module.d.scss.ts
+**/*.module.scss.d.ts
