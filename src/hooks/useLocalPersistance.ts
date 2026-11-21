@@ -11,7 +11,7 @@ interface UseLocalPersistenceResult extends LocalData {
   isLoading: boolean;
   error: Error | null;
   saveMainJson: (data: string | null) => Promise<void>;
-  saveSettingsJson: (data: SettingsType) => Promise<void>;
+  saveSettings: (data: SettingsType) => Promise<void>;
 }
 
 export function useLocalPersistence(): UseLocalPersistenceResult {
@@ -25,7 +25,7 @@ export function useLocalPersistence(): UseLocalPersistenceResult {
       try {
         const [main, settings] = await Promise.all([
           localPersistenceService.loadMainJson(),
-          localPersistenceService.loadSettingsJson(),
+          localPersistenceService.loadSettings(),
         ]);
 
         setMainJson(main ?? null);
@@ -50,9 +50,9 @@ export function useLocalPersistence(): UseLocalPersistenceResult {
     }
   }, []);
 
-  const saveSettingsJson = useCallback(async (data: SettingsType) => {
+  const saveSettings = useCallback(async (data: SettingsType) => {
     try {
-      await localPersistenceService.saveSettingsJson(data);
+      await localPersistenceService.saveSettings(data);
       setSettingsJson(data);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Saving failed'));
@@ -66,6 +66,6 @@ export function useLocalPersistence(): UseLocalPersistenceResult {
     isLoading,
     error,
     saveMainJson,
-    saveSettingsJson,
+    saveSettings,
   };
 }

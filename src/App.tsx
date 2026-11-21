@@ -32,7 +32,7 @@ const App = () => {
       try {
         const [, settingsJson] = await Promise.all([
           loadMainJson(),
-          localPersistenceService.loadSettingsJson(),
+          localPersistenceService.loadSettings(),
         ]);
 
         if (!isMounted) return;
@@ -60,7 +60,7 @@ const App = () => {
 
   const saveSettings = async (settingsToSave: SettingsType) => {
     try {
-      await localPersistenceService.saveSettingsJson(settingsToSave);
+      await localPersistenceService.saveSettings(settingsToSave);
     } catch (error) {
       console.error('Failed to save settings:', error);
     }
