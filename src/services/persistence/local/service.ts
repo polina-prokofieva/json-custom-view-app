@@ -13,13 +13,14 @@ export const localPersistenceService = {
     return typeof value === 'string' ? value : null;
   },
 
-  async saveSettings(data: SettingsType) {
+  async saveSettings(data: SettingsType | null) {
     const db = await localDatabasePromise;
     await db.put('localData', data, 'settingsJson');
   },
 
-  async loadSettings() {
+  async loadSettings(): Promise<SettingsType | null> {
     const db = await localDatabasePromise;
-    return db.get('localData', 'settingsJson');
+    const value = db.get('localData', 'settingsJson');
+    return value && typeof value === 'object' ? (value as SettingsType) : null;
   },
 };
