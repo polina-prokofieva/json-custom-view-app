@@ -5,7 +5,7 @@ import { SettingsType } from 'json-custom-view';
 
 type State = {
   mainJson: string | null;
-  settings: SettingsType | null;
+  settings: SettingsType;
 };
 
 type Actions = {
@@ -13,16 +13,17 @@ type Actions = {
   saveMainJson: (data: string | null) => Promise<boolean>;
 
   loadSettings: () => Promise<void>;
-  saveSettings: (settings: SettingsType | null) => Promise<boolean>;
+  saveSettings: (settings: SettingsType) => Promise<boolean>;
+  updateSettings: (settings: Partial<SettingsType>) => Promise<boolean>;
 };
 
 type JsonStore = State & Actions;
 
 export const useJsonStore = create<JsonStore>()(
   devtools(
-    (set) => ({
+    (set, get) => ({
       mainJson: null,
-      settings: null,
+      settings: {},
 
       loadMainJson: async () => {
         const mainJson = await persistenceService.loadMainJson();
@@ -47,13 +48,31 @@ export const useJsonStore = create<JsonStore>()(
       },
 
       saveSettings: async (settings) => {
+        set({ settings }, undefined, 'saveSettings');
+
         try {
           await persistenceService.saveSettings(settings);
-          set({ settings }, undefined, 'saveSettings');
           return true;
 
         } catch (error) {
           console.error('Failed to save Settings:', error);
+          return false;
+        }
+      },
+
+      updateSettings: async (settingsToUpdate) => {
+        set(
+          (state) => ({ settings: { ...state.settings, ...settingsToUpdate } }),
+          undefined,
+          'updateSettings'
+        );
+
+        try {
+          await persistenceService.saveSettings(get().settings);
+          return true;
+
+        } catch (error) {
+          console.error('Failed to update Settings:', error);
           return false;
         }
       },

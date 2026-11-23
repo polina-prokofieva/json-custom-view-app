@@ -1,13 +1,14 @@
 import { useRef, useEffect, FC } from 'react';
 import { generate } from 'json-custom-view';
 import styles from './GeneratedView.module.scss';
+import { useJsonStore } from '../../../store/useJsonStore';
 
 interface Props {
   json: string;
-  settings: object;
 }
 
-const GeneratedView: FC<Props> = ({ json, settings }) => {
+const GeneratedView: FC<Props> = ({ json }) => {
+  const settings = useJsonStore((state) => state.settings);
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

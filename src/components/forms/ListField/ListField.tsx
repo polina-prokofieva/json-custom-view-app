@@ -1,23 +1,20 @@
 import {
   FC,
-  Dispatch,
-  SetStateAction,
   useState,
   useEffect,
   ChangeEvent,
   KeyboardEvent,
 } from 'react';
-import { SettingsType } from 'json-custom-view';
 import ExistingValueItem from '../ExistingValueItem/ExistingValueItem';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './ListField.module.scss';
+import { useJsonStore } from '../../../store/useJsonStore';
 
 interface Props {
   name: string;
   value: string[];
   description?: string;
   placeholder?: string;
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
 const ListField: FC<Props> = ({
@@ -25,8 +22,9 @@ const ListField: FC<Props> = ({
   value = [],
   description,
   placeholder,
-  setSettings,
 }) => {
+  const updateSettings = useJsonStore((state) => state.updateSettings);
+
   const [list, setList] = useState(value);
   const [current, setCurrent] = useState('');
 
@@ -52,7 +50,7 @@ const ListField: FC<Props> = ({
   };
 
   useEffect(() => {
-    setSettings(prev => ({ ...prev, [name]: list }));
+    updateSettings({ [name]: list });
   }, [list]);
 
   return (

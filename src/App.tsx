@@ -9,9 +9,6 @@ import FullViewPage from './pages/FullViewPage/FullViewPage';
 import PutStringPage from './pages/PutStringPage/PutStringPage';
 import StartPage from './pages/StartPage/StartPage';
 import UploadFilePage from './pages/UploadFilePage/UploadFilePage';
-import { SettingsType } from 'json-custom-view';
-
-import { localPersistenceService } from './services/persistence/local/service';
 import { useJsonStore } from './store/useJsonStore';
 
 import './App.scss';
@@ -20,7 +17,7 @@ import { Spinner } from './components/Spinner/Spinner';
 const App = () => {
   const mainJson = useJsonStore((state) => state.mainJson);
   const loadMainJson = useJsonStore((state) => state.loadMainJson);
-  const [settings, setSettings] = useState<SettingsType>({});
+  const loadSettings = useJsonStore((state) => state.loadSettings);
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -30,14 +27,7 @@ const App = () => {
 
     const loadData = async () => {
       try {
-        const [, settingsJson] = await Promise.all([
-          loadMainJson(),
-          localPersistenceService.loadSettings(),
-        ]);
-
-        if (!isMounted) return;
-
-        setSettings(settingsJson ?? {});
+        await Promise.all([loadMainJson(), loadSettings()]);
       } catch (error) {
         console.error('Failed to load local data:', error);
 
@@ -56,20 +46,7 @@ const App = () => {
     return () => {
       isMounted = false;
     };
-  }, [loadMainJson]);
-
-  const saveSettings = async (settingsToSave: SettingsType) => {
-    try {
-      await localPersistenceService.saveSettings(settingsToSave);
-    } catch (error) {
-      console.error('Failed to save settings:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (isLoading) return;
-    saveSettings(settings);
-  }, [settings, isLoading]);
+  }, [loadMainJson, loadSettings]);
 
   if (isLoading) {
     return <Spinner />;
@@ -103,10 +80,7 @@ const App = () => {
           path={`/${PROJECT_NAME}/full-view`}
           element={
             mainJson ? (
-              <FullViewPage
-                settings={settings}
-                setSettings={setSettings}
-              />
+              <FullViewPage />
             ) : (
               <Navigate replace to={`/${PROJECT_NAME}/`} />
             )

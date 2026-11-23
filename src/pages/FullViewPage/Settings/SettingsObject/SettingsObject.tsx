@@ -1,21 +1,17 @@
 import {
   FC,
   ChangeEvent,
-  Dispatch,
-  SetStateAction,
   useState,
   useEffect,
 } from 'react';
-import { SettingsType } from 'json-custom-view';
 import { convertSettingsToString } from '../../../../utils/settings';
 import styles from './SettingsObject.module.scss';
+import { useJsonStore } from '../../../../store/useJsonStore';
 
-interface Props {
-  settings: SettingsType;
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
-}
+const SettingsObject: FC = () => {
+  const settings = useJsonStore((state) => state.settings);
+  const saveSettings = useJsonStore((state) => state.saveSettings);
 
-const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
   const [value, setValue] = useState(convertSettingsToString(settings));
 
   const handleChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,9 +21,9 @@ const SettingsObject: FC<Props> = ({ settings, setSettings }) => {
   useEffect(() => {
     try {
       const newSettings = JSON.parse(value);
-      setSettings(newSettings);
-    } catch (error) {
-      // console.log(error);
+      saveSettings(newSettings);
+    } catch {
+      // Ignore invalid JSON while the user is typing
     }
   }, [value]);
 
