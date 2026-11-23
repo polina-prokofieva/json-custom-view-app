@@ -9,16 +9,15 @@ import FullViewPage from './pages/FullViewPage/FullViewPage';
 import PutStringPage from './pages/PutStringPage/PutStringPage';
 import StartPage from './pages/StartPage/StartPage';
 import UploadFilePage from './pages/UploadFilePage/UploadFilePage';
-import { SettingsType } from 'json-custom-view';
-
-import { localPersistenceService } from './services/persistence/local/service';
+import { useJsonStore } from './store/useJsonStore';
 
 import './App.scss';
 import { Spinner } from './components/Spinner/Spinner';
 
 const App = () => {
-  const [data, setData] = useState<string | null>(null);
-  const [settings, setSettings] = useState<SettingsType>({});
+  const mainJson = useJsonStore((state) => state.mainJson);
+  const loadMainJson = useJsonStore((state) => state.loadMainJson);
+  const loadSettings = useJsonStore((state) => state.loadSettings);
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -28,15 +27,7 @@ const App = () => {
 
     const loadData = async () => {
       try {
-        const [mainJson, settingsJson] = await Promise.all([
-          localPersistenceService.loadMainJson(),
-          localPersistenceService.loadSettingsJson(),
-        ]);
-
-        if (!isMounted) return;
-
-        setData(typeof mainJson === 'string' ? mainJson : null);
-        setSettings(settingsJson ?? {});
+        await Promise.all([loadMainJson(), loadSettings()]);
       } catch (error) {
         console.error('Failed to load local data:', error);
 
@@ -55,30 +46,7 @@ const App = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
-
-  const saveData = async (dataToSave: string | null) => {
-    setData(dataToSave);
-
-    try {
-      await localPersistenceService.saveMainJson(dataToSave);
-    } catch (error) {
-      console.error('Failed to save JSON:', error);
-    }
-  }
-
-  const saveSettings = async (settingsToSave: SettingsType) => {
-    try {
-      await localPersistenceService.saveSettingsJson(settingsToSave);
-    } catch (error) {
-      console.error('Failed to save settings:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (isLoading) return;
-    saveSettings(settings);
-  }, [settings, isLoading]);
+  }, [loadMainJson, loadSettings]);
 
   if (isLoading) {
     return <Spinner />;
@@ -89,34 +57,30 @@ const App = () => {
       <Routes>
         <Route
           path={`/${PROJECT_NAME}`}
-          element={<StartPage isSavedDataExists={!!data} />}
+          element={<StartPage isSavedDataExists={!!mainJson} />}
         />
         <Route
           path={`/${PROJECT_NAME}/`}
-          element={<StartPage isSavedDataExists={!!data} />}
+          element={<StartPage isSavedDataExists={!!mainJson} />}
         />
         <Route
           path={`/${PROJECT_NAME}/start`}
-          element={<StartPage isSavedDataExists={!!data} />}
+          element={<StartPage isSavedDataExists={!!mainJson} />}
         />
 
         <Route
           path={`/${PROJECT_NAME}/upload-json-file`}
-          element={<UploadFilePage setData={saveData} />}
+          element={<UploadFilePage />}
         />
         <Route
           path={`/${PROJECT_NAME}/put-json-string`}
-          element={<PutStringPage setData={saveData} />}
+          element={<PutStringPage />}
         />
         <Route
           path={`/${PROJECT_NAME}/full-view`}
           element={
-            data ? (
-              <FullViewPage
-                data={data}
-                settings={settings}
-                setSettings={setSettings}
-              />
+            mainJson ? (
+              <FullViewPage />
             ) : (
               <Navigate replace to={`/${PROJECT_NAME}/`} />
             )

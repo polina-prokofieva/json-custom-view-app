@@ -1,28 +1,22 @@
-import {
-  FC,
-  FormEvent,
-  useState,
-  ChangeEvent,
-  SetStateAction,
-  Dispatch,
-} from 'react';
+import { FC, FormEvent, useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PutJsonLayout from '../../layouts/PutJsonLayout/PutJsonLayout';
+import { useJsonStore } from '../../store/useJsonStore';
 import styles from './PutStringPage.module.scss';
 
-interface Props {
-  setData: (dataToSave: string | null) => void;
-}
-
-const PutStringPage: FC<Props> = ({ setData }) => {
+const PutStringPage: FC = () => {
+  const saveMainJson = useJsonStore((state) => state.saveMainJson);
   const [jsonValue, setJsonValue] = useState<string>('');
   const navigate = useNavigate();
   const formName = 'jsonString';
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    setData(jsonValue);
-    navigate(`/${PROJECT_NAME}/full-view`);
+
+    const isSaved = await saveMainJson(jsonValue);
+    if (isSaved) {
+      navigate(`/${PROJECT_NAME}/full-view`);
+    }
   };
 
   const textareaChangedHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {

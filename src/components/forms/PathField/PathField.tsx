@@ -1,25 +1,24 @@
 import {
   ChangeEvent,
   KeyboardEvent,
-  Dispatch,
   FC,
-  SetStateAction,
   useMemo,
   useState,
   useEffect,
 } from 'react';
-import { SettingsType } from 'json-custom-view';
 import { SmallButton } from '../../Button/Button';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './PathField.module.scss';
+import { useJsonStore } from '../../../store/useJsonStore';
 
 interface Props {
   name: string;
   value: string[];
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
-const PathField: FC<Props> = ({ name, value = [], setSettings }) => {
+const PathField: FC<Props> = ({ name, value = [] }) => {
+  const updateSettings = useJsonStore((state) => state.updateSettings);
+
   const [path, setPath] = useState(value);
   const [current, setCurrent] = useState('');
 
@@ -46,7 +45,7 @@ const PathField: FC<Props> = ({ name, value = [], setSettings }) => {
   };
 
   useEffect(() => {
-    setSettings(prev => ({ ...prev, [name]: path }));
+    updateSettings({ [name]: path });
   }, [path]);
 
   return (

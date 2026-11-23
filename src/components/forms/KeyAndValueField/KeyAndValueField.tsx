@@ -1,24 +1,22 @@
 import {
   FC,
-  Dispatch,
-  SetStateAction,
   useState,
   useEffect,
   ChangeEvent,
   KeyboardEvent,
   useMemo,
 } from 'react';
-import { keysForArraysType, SettingsType } from 'json-custom-view';
+import { keysForArraysType } from 'json-custom-view';
 import Button from '../../Button/Button';
 import ExistingValueItem from '../ExistingValueItem/ExistingValueItem';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './KeyAndValueField.module.scss';
+import { useJsonStore } from '../../../store/useJsonStore';
 
 interface Props {
   name: string;
   wholeValue: keysForArraysType;
   description?: string;
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
 type FieldType = {
@@ -32,8 +30,10 @@ const KeyAndValueField: FC<Props> = ({
   name,
   wholeValue,
   description,
-  setSettings,
 }) => {
+  const settings = useJsonStore((state) => state.settings);
+  const updateSettings = useJsonStore((state) => state.updateSettings);
+
   const [field, setField] = useState<FieldType>(initialField);
 
   const keys = useMemo(
@@ -46,11 +46,9 @@ const KeyAndValueField: FC<Props> = ({
     const keyToDelete = !!keys && keys[idx];
 
     if (keyToDelete) {
-      setSettings(prev => {
-        const changingObject = { ...prev[name] };
-        delete changingObject[keyToDelete];
-        return { ...prev, [name]: changingObject };
-      });
+      const changingObject = { ...settings[name] };
+      delete changingObject[keyToDelete];
+      updateSettings({ [name]: changingObject });
     }
   };
 
@@ -71,10 +69,9 @@ const KeyAndValueField: FC<Props> = ({
     const { key, pattern } = field;
 
     if (key) {
-      setSettings(prev => ({
-        ...prev,
-        [name]: { ...prev[name], [key]: pattern },
-      }));
+      updateSettings({
+        [name]: { ...settings[name], [key]: pattern },
+      });
     }
   };
 

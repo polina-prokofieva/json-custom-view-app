@@ -1,5 +1,4 @@
-import { FC, ChangeEvent, Dispatch, SetStateAction, useCallback, JSX } from 'react';
-import { SettingsType } from 'json-custom-view';
+import { FC, ChangeEvent, useCallback, JSX } from 'react';
 import { SettingsFieldName, settingsFields } from '../fields';
 import styles from './SettingsForm.module.scss';
 import SettingField from '../SettingField/SettingField';
@@ -9,13 +8,12 @@ import DoubleTextField from '../../../../components/forms/DoubleTextField/Double
 import ListField from '../../../../components/forms/ListField/ListField';
 import PathField from '../../../../components/forms/PathField/PathField';
 import KeyAndValueField from '../../../../components/forms/KeyAndValueField/KeyAndValueField';
+import { useJsonStore } from '../../../../store/useJsonStore';
 
-interface Props {
-  settings: SettingsType;
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
-}
+const SettingsForm: FC = () => {
+  const settings = useJsonStore((state) => state.settings);
+  const updateSettings = useJsonStore((state) => state.updateSettings);
 
-const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
   const settingsFieldNames = Object.keys(settingsFields) as SettingsFieldName[];
 
   const handleChange = (evt: ChangeEvent<HTMLFormElement>) => {
@@ -25,9 +23,9 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
       const { Component } = settingsFields[name as SettingsFieldName];
 
       if (Component === Checkbox) {
-        setSettings((prev: SettingsType) => ({ ...prev, [name]: checked }));
+        updateSettings({ [name]: checked });
       } else if (Component === TextField) {
-        setSettings((prev: SettingsType) => ({ ...prev, [name]: value }));
+        updateSettings({ [name]: value });
       }
     }
   };
@@ -50,7 +48,7 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
       } else if (Component === TextField) {
         props = { value, current: settings[value] ?? '' };
       } else {
-        props = { setSettings, name: value };
+        props = { name: value };
       }
 
       if (Component === DoubleTextField) {
@@ -73,7 +71,7 @@ const SettingsForm: FC<Props> = ({ settings, setSettings }) => {
 
       return <SettingField description={description} {...props} />;
     },
-    [settings, setSettings]
+    [settings]
   );
 
   return (

@@ -3,19 +3,16 @@ import {
   useState,
   useEffect,
   ChangeEvent,
-  Dispatch,
-  SetStateAction,
 } from 'react';
-import { SettingsType } from 'json-custom-view';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
 import styles from './DoubleTextField.module.scss';
+import { useJsonStore } from '../../../store/useJsonStore';
 
 interface Props {
   name: string;
   initialValues: [string, string];
   labels: [string, string];
   description?: string;
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
 const DoubleTextField: FC<Props> = ({
@@ -23,8 +20,8 @@ const DoubleTextField: FC<Props> = ({
   initialValues = ['false', 'true'],
   labels,
   description,
-  setSettings,
 }) => {
+  const updateSettings = useJsonStore((state) => state.updateSettings);
   const [values, setValues] = useState<[string, string]>(initialValues);
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>, idx: number) => {
@@ -36,7 +33,7 @@ const DoubleTextField: FC<Props> = ({
   };
 
   useEffect(() => {
-    setSettings((prev: SettingsType) => ({ ...prev, [name]: values }));
+    updateSettings({ [name]: values });
   }, [values]);
 
   return (

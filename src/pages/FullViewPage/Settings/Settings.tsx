@@ -1,21 +1,21 @@
-import { FC, Dispatch, SetStateAction, useState } from 'react';
+import { FC, useState } from 'react';
 import { transform } from 'json-custom-view';
 import { SettingsTabType } from '../../../types';
-import { SettingsType } from 'json-custom-view';
 import SettingsForm from './SettingsForm/SettingsForm';
 import SettingsObject from './SettingsObject/SettingsObject';
 import SettingsHeader from './SettingsHeader/SettingsHeader';
 import styles from './Settings.module.scss';
 import Button, { ButtonNavLink } from '../../../components/Button/Button';
 import { download } from '../../../utils/downloadFile';
+import { useJsonStore } from '../../../store/useJsonStore';
 
 interface Props {
   data: string;
-  settings: SettingsType;
-  setSettings: Dispatch<SetStateAction<SettingsType>>;
 }
 
-const Settings: FC<Props> = ({ data, settings, setSettings }) => {
+const Settings: FC<Props> = ({ data }) => {
+  const settings = useJsonStore((state) => state.settings);
+
   const [activeTab, setActiveTab] = useState<SettingsTabType>('form');
   const handleClick = () => {
     const transformed = transform(JSON.parse(data), settings);
@@ -27,10 +27,10 @@ const Settings: FC<Props> = ({ data, settings, setSettings }) => {
       <SettingsHeader activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className={styles.body}>
         {activeTab === 'form' && (
-          <SettingsForm settings={settings} setSettings={setSettings} />
+          <SettingsForm />
         )}
         {activeTab === 'object' && (
-          <SettingsObject settings={settings} setSettings={setSettings} />
+          <SettingsObject />
         )}
         <div className={styles.buttons}>
           <ButtonNavLink to='/start' label='Back to Home' />

@@ -1,23 +1,12 @@
-import {
-  FC,
-  FormEvent,
-  Dispatch,
-  SetStateAction,
-  ChangeEvent,
-  useState,
-  useEffect,
-  useRef,
-} from 'react';
+import { FC, FormEvent, ChangeEvent, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import PutJsonLayout from '../../layouts/PutJsonLayout/PutJsonLayout';
+import { useJsonStore } from '../../store/useJsonStore';
 import styles from './UploadFilePage.module.scss';
 
-interface Props {
-  setData: (dataToSave: string | null) => void;
-}
-
-const UploadFilePage: FC<Props> = ({ setData }) => {
+const UploadFilePage: FC = () => {
+  const saveMainJson = useJsonStore((state) => state.saveMainJson);
   const [jsonValue, setJsonValue] = useState<string>('');
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -25,17 +14,24 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
   const navigate = useNavigate();
   let reader: FileReader;
 
+  const saveAndOpen = async (value: string) => {
+    const isSaved = await saveMainJson(value);
+    if (isSaved) {
+      navigate(`/${PROJECT_NAME}/full-view`);
+    }
+  };
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    setData(jsonValue);
-    navigate(`/${PROJECT_NAME}/full-view`);
+    void saveAndOpen(jsonValue);
   };
 
   const handleFileRead = () => {
     const fileContent = reader.result;
 
-    if (typeof fileContent === 'string') {
+    if (typeof fileContent === 'string' && fileContent.length) {
       setJsonValue(fileContent);
+      void saveAndOpen(fileContent);
     }
   };
 
@@ -52,13 +48,6 @@ const UploadFilePage: FC<Props> = ({ setData }) => {
   const handleCaptureClick = () => {
     fileInput?.current?.click();
   };
-
-  useEffect(() => {
-    if (jsonValue.length) {
-      setData(jsonValue);
-      navigate(`/${PROJECT_NAME}/full-view`);
-    }
-  }, [jsonValue]);
 
   return (
     <PutJsonLayout
