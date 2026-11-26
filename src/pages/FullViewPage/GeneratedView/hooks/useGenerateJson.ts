@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 import { useJsonStore } from "../../../../store/useJsonStore";
-import { generate } from "json-custom-view";
+import { generate, GenerateResultType } from "json-custom-view";
 
 type Params = {
   json: string;
@@ -15,7 +15,7 @@ const useGenerateJson = ({ json, mainRef }: Params): void => {
     if (!mainNode) return;
 
     mainNode.innerHTML = '';
-    generate(json, mainNode, settings);
+    const renderInfo: GenerateResultType = generate(json, mainNode, settings);
   }, [json, mainRef, settings]);
 };
 
