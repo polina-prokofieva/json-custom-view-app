@@ -33,6 +33,8 @@ const KeyAndValueField: FC<Props> = ({
 }) => {
   const settings = useJsonStore((state) => state.settings);
   const updateSettings = useJsonStore((state) => state.updateSettings);
+  // SettingsType has an `unknown` index signature, so narrow the value to spread it.
+  const currentValue = settings[name] as keysForArraysType | undefined;
 
   const [field, setField] = useState<FieldType>(initialField);
 
@@ -46,7 +48,7 @@ const KeyAndValueField: FC<Props> = ({
     const keyToDelete = !!keys && keys[idx];
 
     if (keyToDelete) {
-      const changingObject = { ...settings[name] };
+      const changingObject = { ...currentValue };
       delete changingObject[keyToDelete];
       updateSettings({ [name]: changingObject });
     }
@@ -70,7 +72,7 @@ const KeyAndValueField: FC<Props> = ({
 
     if (key) {
       updateSettings({
-        [name]: { ...settings[name], [key]: pattern },
+        [name]: { ...currentValue, [key]: pattern },
       });
     }
   };
