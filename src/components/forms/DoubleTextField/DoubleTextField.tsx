@@ -1,7 +1,6 @@
 import {
   FC,
   useState,
-  useEffect,
   ChangeEvent,
 } from 'react';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
@@ -25,16 +24,11 @@ const DoubleTextField: FC<Props> = ({
   const [values, setValues] = useState<[string, string]>(initialValues);
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>, idx: number) => {
-    setValues(prev => {
-      const result: [string, string] = [...prev];
-      result[idx] = evt.target.value;
-      return result;
-    });
+    const updated: [string, string] = [...values];
+    updated[idx] = evt.target.value;
+    setValues(updated);
+    updateSettings({ [name]: updated });
   };
-
-  useEffect(() => {
-    updateSettings({ [name]: values });
-  }, [values]);
 
   return (
     <div className={styles.DoubleTextField}>

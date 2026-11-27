@@ -4,7 +4,6 @@ import {
   FC,
   useMemo,
   useState,
-  useEffect,
 } from 'react';
 import { SmallButton } from '../../Button/Button';
 import LabelWithDescription from '../LabelWithDescription/LabelWithDescription';
@@ -31,6 +30,7 @@ const PathField: FC<Props> = ({ name, value = [] }) => {
   const handleReset = () => {
     setCurrent('');
     setPath([]);
+    updateSettings({ [name]: [] });
   };
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -39,14 +39,12 @@ const PathField: FC<Props> = ({ name, value = [] }) => {
 
   const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
     if (evt.key === 'Enter' && current.length) {
-      setPath(prev => [...prev, current]);
+      const updated = [...path, current];
+      setPath(updated);
+      updateSettings({ [name]: updated });
       setCurrent('');
     }
   };
-
-  useEffect(() => {
-    updateSettings({ [name]: path });
-  }, [path]);
 
   return (
     <div className={styles.PathField}>
