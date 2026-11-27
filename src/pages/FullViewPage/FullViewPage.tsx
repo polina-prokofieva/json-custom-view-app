@@ -7,7 +7,6 @@ import styles from './FullViewPage.module.scss';
 const FullViewPage: FC = () => {
   const mainJson = useJsonStore((state) => state.mainJson);
 
-  // App redirects away when there is no data; this guard narrows the type to string.
   if (!mainJson) return null;
 
   return (

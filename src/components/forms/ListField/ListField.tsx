@@ -1,7 +1,6 @@
 import {
   FC,
   useState,
-  useEffect,
   ChangeEvent,
   KeyboardEvent,
 } from 'react';
@@ -35,23 +34,20 @@ const ListField: FC<Props> = ({
   const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
     if (evt.key === 'Enter') {
       if (list.indexOf(current) === -1) {
-        setList(prev => [...prev, current]);
+        const updated = [...list, current];
+        setList(updated);
+        updateSettings({ [name]: updated });
       }
       setCurrent('');
     }
   };
 
   const handleDeleteItem = (idx: number) => {
-    setList(prev => {
-      const updated = [...prev];
-      updated.splice(idx, 1);
-      return updated;
-    });
+    const updated = [...list];
+    updated.splice(idx, 1);
+    setList(updated);
+    updateSettings({ [name]: updated });
   };
-
-  useEffect(() => {
-    updateSettings({ [name]: list });
-  }, [list]);
 
   return (
     <div className={styles.ListField}>
