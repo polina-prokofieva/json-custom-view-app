@@ -4,11 +4,14 @@ import Button from '../../components/Button/Button';
 import PutJsonLayout from '../../layouts/PutJsonLayout/PutJsonLayout';
 import { useJsonStore } from '../../store/useJsonStore';
 import styles from './UploadFilePage.module.scss';
+import { useRenderStore } from '../../store/useRenderStore';
 
 const UploadFilePage: FC = () => {
   const saveMainJson = useJsonStore((state) => state.saveMainJson);
   const [jsonValue, setJsonValue] = useState<string>('');
   const fileInput = useRef<HTMLInputElement>(null);
+
+  const renderErrors = useRenderStore((state) => state.errors);
 
   const formName = 'jsonFile';
   const navigate = useNavigate();
@@ -55,20 +58,28 @@ const UploadFilePage: FC = () => {
       readyToRender={!!jsonValue.length}
       handleSubmit={handleSubmit}
     >
-      <div className={styles.UploadFile}>
-        <div className={styles.uploadText} onClick={handleCaptureClick}>
-          Drag and drop .json file here or{' '}
-          <Button type='button' label='select it from computer' />
+      <>
+        {renderErrors?.length ? (
+          renderErrors.map((errorMessage) => (
+          <div className={styles.errorMessage}>
+            {errorMessage}
+          </div>))
+        ) : null}
+        <div className={styles.UploadFile}>
+          <div className={styles.uploadText} onClick={handleCaptureClick}>
+            Drag and drop .json file here or{' '}
+            <Button type='button' label='select it from computer' />
+          </div>
+          <input
+            type='file'
+            id={formName}
+            name={formName}
+            accept='.json'
+            onChange={handleChange}
+            ref={fileInput}
+          />
         </div>
-        <input
-          type='file'
-          id={formName}
-          name={formName}
-          accept='.json'
-          onChange={handleChange}
-          ref={fileInput}
-        />
-      </div>
+      </>
     </PutJsonLayout>
   );
 };
